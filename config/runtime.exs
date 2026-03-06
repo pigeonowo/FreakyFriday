@@ -21,7 +21,7 @@ if System.get_env("PHX_SERVER") do
 end
 
 config :freaky_friday, :spotify_api_client_id, System.fetch_env!("SPOTIFY_API_CLIENT_ID")
-config :freaky_friday, :spotify_api_client_id, System.fetch_env!("SPOTIFY_API_CLIENT_SECRET")
+config :freaky_friday, :spotify_api_client_secret, System.fetch_env!("SPOTIFY_API_CLIENT_SECRET")
 
 if config_env() == :prod do
   database_path =

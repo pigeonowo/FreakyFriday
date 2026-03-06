@@ -18,6 +18,8 @@ defmodule FreakyFridayWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/spotify_callback", SpotifyApiController, :callback
+    get "/spotify_login", SpotifyApiController, :login
   end
 
   # Other scopes may use custom stacks.
