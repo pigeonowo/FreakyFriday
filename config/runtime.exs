@@ -20,6 +20,9 @@ if System.get_env("PHX_SERVER") do
   config :freaky_friday, FreakyFridayWeb.Endpoint, server: true
 end
 
+config :freaky_friday, :spotify_api_client_id, System.fetch_env!("SPOTIFY_API_CLIENT_ID")
+config :freaky_friday, :spotify_api_client_id, System.fetch_env!("SPOTIFY_API_CLIENT_SECRET")
+
 if config_env() == :prod do
   database_path =
     System.get_env("DATABASE_PATH") ||
