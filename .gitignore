@@ -39,3 +39,6 @@ npm-debug.log
 *.db
 *.db-*
 
+# ignore .env files
+.env
+.env.*
