@@ -18,6 +18,9 @@ defmodule FreakyFridayWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/freaky_friday", FreakyFridayLIVE
+
     get "/spotify_callback", SpotifyApiController, :callback
     get "/spotify_login", SpotifyApiController, :login
   end

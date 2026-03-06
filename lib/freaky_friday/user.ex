@@ -18,15 +18,22 @@ defmodule FreakyFriday.User do
     |> validate_required([:username, :refresh_token, :expires_at])
   end
 
-  def insert!(username, refresh_token, expires_at) do
-    changeset =
-      FreakyFriday.User.changeset(%FreakyFriday.User{}, %{
-        username: username,
-        refresh_token: refresh_token,
-        expires_at: expires_at
-      })
+  def insert_or_update!(username, refresh_token, expires_at) do
+    case Repo.get_by(__MODULE__, username: username) do
+      %__MODULE__{} = user ->
+        cs = changeset(user, %{refresh_token: refresh_token, expires_at: expires_at})
+        FreakyFriday.Repo.update!(cs)
 
-    FreakyFriday.Repo.insert!(changeset)
+      nil ->
+        cs =
+          FreakyFriday.User.changeset(%FreakyFriday.User{}, %{
+            username: username,
+            refresh_token: refresh_token,
+            expires_at: expires_at
+          })
+
+        FreakyFriday.Repo.insert!(cs)
+    end
   end
 
   def get_by_id!(id) do
