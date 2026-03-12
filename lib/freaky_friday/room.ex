@@ -55,7 +55,6 @@ defmodule FreakyFriday.Room do
         state
       end
 
-    IO.inspect(state.participants)
     element = Enum.find(state.participants, fn g -> g.id == participant_id end)
     new_participants = List.delete(state.participants, element)
     {:noreply, %{state | participants: new_participants}}
