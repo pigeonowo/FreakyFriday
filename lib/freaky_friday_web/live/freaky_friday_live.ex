@@ -109,7 +109,7 @@ defmodule FreakyFridayWeb.FreakyFridayLIVE do
                   <div class="flex-1 min-w-0">
                     <div class="text-sm mb-1 font-medium text-base-content truncate">
                       <span
-                        :if={Room.is_host(@participant_id)}
+                        :if={Room.is_host(p.participant_id)}
                         class="px-1 py-0.5 text-[10px] badge badge-primary badge-sm font-bold"
                       >
                         Host
