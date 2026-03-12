@@ -127,8 +127,6 @@ defmodule FreakyFridayWeb.FreakyFridayLIVE do
 
   def handle_presence_diff(%{leaves: leaves}) do
     # handle leaves
-    IO.inspect(leaves)
-
     for {p_id, _} <- leaves do
       Room.leave(p_id)
     end

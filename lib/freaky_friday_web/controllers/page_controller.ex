@@ -12,7 +12,6 @@ defmodule FreakyFridayWeb.PageController do
   def join_guest(conn, %{"name" => name} = _params) do
     participant = FreakyFriday.Participant.new(name, FreakyFriday.gen_random_string())
     Room.join(participant)
-    IO.inspect(Room.get_state(), label: "State after joining")
 
     conn
     |> put_session(:username, participant.name)
