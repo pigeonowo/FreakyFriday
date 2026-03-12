@@ -234,7 +234,6 @@ defmodule FreakyFridayWeb.FreakyFridayLIVE do
       |> update(:skips_left, fn _ -> skips_left end)
       |> put_flash(:info, "#{username} hat geskipped!")
 
-    Logger.debug("test")
     {:noreply, socket}
   end
 
