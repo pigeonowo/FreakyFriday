@@ -18,6 +18,8 @@ defmodule FreakyFridayWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/join_host", PageController, :join_host
+    post "/join_guest", PageController, :join_guest
 
     live "/freaky_friday", FreakyFridayLIVE
 

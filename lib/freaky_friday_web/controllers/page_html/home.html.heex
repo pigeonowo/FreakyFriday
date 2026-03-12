@@ -1,5 +1,17 @@
 <Layouts.app flash={@flash}>
-  <%= if @current_song do %>
-    Current Song playing: {@current_song}
-  <% end %>
+  <form action={~p"/join_guest"} method="post">
+    <input type="hidden" name="_csrf_token" value={Phoenix.Controller.get_csrf_token()} />
+    <input name="name" />
+    <.button>
+      Join as guest
+    </.button>
+  </form>
+  <a href={~p"/join_host"}>
+    <.button>
+      Join as host
+    </.button>
+  </a>
 </Layouts.app>
+
+<%!-- join as guest --%>
+<%!-- join as host --%>

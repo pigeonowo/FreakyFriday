@@ -16,6 +16,9 @@ defmodule FreakyFriday.Application do
       {Phoenix.PubSub, name: FreakyFriday.PubSub},
       # Start a worker by calling: FreakyFriday.Worker.start_link(arg)
       # {FreakyFriday.Worker, arg},
+      {FreakyFriday.Cache, nil},
+      {FreakyFriday.Room, nil},
+      FreakyFridayWeb.Presence,
       # Start to serve requests, typically the last entry
       FreakyFridayWeb.Endpoint
     ]

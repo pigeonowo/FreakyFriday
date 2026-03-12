@@ -122,11 +122,4 @@ defmodule FreakyFriday.SpotifyApi do
   def get_client_id() do
     Application.fetch_env!(:freaky_friday, :spotify_api_client_id)
   end
-
-  @spec gen_random_string() :: String.t()
-  def gen_random_string() do
-    for _ <- 0..16, into: "" do
-      <<Enum.random(?A..?Z)>>
-    end
-  end
 end

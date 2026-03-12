@@ -15,7 +15,7 @@ defmodule FreakyFriday.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :refresh_token, :expires_at])
-    |> validate_required([:username, :refresh_token, :expires_at])
+    |> validate_required([:username])
   end
 
   def insert_or_update!(username, refresh_token, expires_at) do
@@ -37,6 +37,36 @@ defmodule FreakyFriday.User do
   end
 
   def get_by_id!(id) do
-    Repo.get_by!(__MODULE__, id: id)
+    case id do
+      nil -> nil
+      _ -> Repo.get_by!(__MODULE__, id: id)
+    end
+  end
+
+  def get_by_id(id) do
+    case id do
+      nil ->
+        {:error, "id is nil"}
+
+      _ ->
+        case Repo.get_by(__MODULE__, id: id) do
+          nil -> {:error, "not found"}
+          user -> {:ok, user}
+        end
+    end
+  end
+
+  def update_refreshtoken(user) do
+    {_access_token, refresh_token, expires_at} =
+      FreakyFriday.SpotifyApi.refresh_token(user.refresh_token)
+
+    if refresh_token do
+      cs =
+        FreakyFriday.User.changeset(user, %{refresh_token: refresh_token, expires_at: expires_at})
+
+      FreakyFriday.Repo.update!(cs)
+    end
+
+    nil
   end
 end
