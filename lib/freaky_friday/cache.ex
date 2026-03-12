@@ -7,9 +7,9 @@ defmodule FreakyFriday.Cache do
 
   @impl true
   def init(_) do
-    a_tok = ""
+    a_tok = nil
 
-    r_tok = ""
+    r_tok = nil
 
     {:ok, {a_tok, r_tok, DateTime.now!("Etc/UTC")}}
   end
@@ -24,7 +24,7 @@ defmodule FreakyFriday.Cache do
 
   @impl true
   def handle_call(:get_access_token, _from, {a_tok, r_tok, e_at} = state) do
-    if FreakyFriday.SpotifyApi.token_needs_refresh?(e_at) do
+    if FreakyFriday.SpotifyApi.token_needs_refresh?(e_at) and r_tok do
       {access_token, refresh_token, e_at} = FreakyFriday.SpotifyApi.refresh_token(r_tok)
       {:reply, access_token, {access_token, refresh_token, e_at}}
     else

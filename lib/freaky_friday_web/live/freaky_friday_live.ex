@@ -103,15 +103,21 @@ defmodule FreakyFridayWeb.FreakyFridayLIVE do
 
               <div class="space-y-3">
                 <div :for={p <- @participants} id={p.participant_id} class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-rose-400 flex items-center justify-center text-white font-semibold">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 from-20% via-blue-400 to-green-500 to-80% flex items-center justify-center text-white font-semibold">
                     {initials(p.username)}
                   </div>
                   <div class="flex-1 min-w-0">
-                    <div class="text-sm font-medium text-base-content truncate">
-                      {p.username} ({p.skips} {if(p.skips == 1, do: "skip", else: "skips")} left)
+                    <div class="text-sm mb-1 font-medium text-base-content truncate">
+                      <span
+                        :if={Room.is_host(@participant_id)}
+                        class="px-1 py-0.5 text-[10px] badge badge-primary badge-sm font-bold"
+                      >
+                        Host
+                      </span>
+                      <span class="truncate">{p.username}</span>
                     </div>
-                    <div class="text-xs text-base-content/60 truncate">
-                      ID: {p.participant_id}
+                    <div class="text-xs">
+                      {p.skips} {if(p.skips == 1, do: "skip", else: "skips")} left
                     </div>
                   </div>
                 </div>

@@ -36,6 +36,10 @@ defmodule FreakyFriday.Room do
     GenServer.call(__MODULE__, :get_state)
   end
 
+  def is_host(participant_id) do
+    GenServer.call(__MODULE__, {:is_host, participant_id})
+  end
+
   @impl true
   def init(_) do
     {:ok, %{participants: [], host: nil}}
@@ -117,5 +121,9 @@ defmodule FreakyFriday.Room do
       end
 
     {:reply, skips, state}
+  end
+
+  def handle_call({:is_host, participant_id}, _, state) do
+    {:reply, participant_id == state.host, state}
   end
 end
