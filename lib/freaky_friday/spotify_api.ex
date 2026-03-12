@@ -18,10 +18,12 @@ defmodule FreakyFriday.SpotifyApi do
 
     case res.body["item"] do
       nil ->
-        "No Song Playing..."
+        FreakyFriday.Song.new("No Song Playing...", "UNKNOWN", ["UNKNOWN"], nil)
 
       item ->
-        item["name"]
+        artists = Enum.map(item["artists"], fn a -> a["name"] end)
+        image = List.first(item["album"]["images"])["url"]
+        FreakyFriday.Song.new(item["name"], item["album"]["name"], artists, image)
     end
   end
 
