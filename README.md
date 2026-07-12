@@ -2,7 +2,7 @@
 
 Jam out with your colleagues to all kinds of Songs.
 Each user has a limited number of actions. Make sure to skip the song you hate the most.
-
+![freaky_friday_screenshot](/docs/freaky_friday.png)
 ## Features
 - 1 room to host your party
 - 1 host who plays the music
@@ -23,7 +23,7 @@ If I want to expand the application for wider use or make it public, I should ma
   - multiple rooms (password)
   - proper account handling
 ## Spotify API
-This program uses the Spotify API. (Details under Development)
+This program uses the Spotify API. (Details under [Development](#Development))
 
 The user who joins as the host is asked to authenticate with Spotify and agree that the app can modify your player (skip songs).
 The access token is stored in the cache and whenever a user wants to skip or get the currently playing song, the program uses that access token.
